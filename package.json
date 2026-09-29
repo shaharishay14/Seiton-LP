@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "screenshots": "node scripts/screenshots.mjs http://localhost:3000 .screenshots 1440 1024 768 390",
     "check:interactions": "node scripts/check-interactions.mjs http://localhost:3000",
-    "check:dev-indicator": "node scripts/check-dev-indicator.mjs http://localhost:3000"
+    "check:dev-indicator": "node scripts/check-dev-indicator.mjs http://localhost:3000",
+    "check:placeholders": "node scripts/check-placeholders.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.48.0",
