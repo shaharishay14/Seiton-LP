@@ -28,7 +28,7 @@ export function Placeholder({ name, label, plain = false }: PlaceholderProps) {
   return (
     <span
       data-placeholder={name}
-      className="rounded-[5px] bg-accent-soft px-1.5 py-0.5 font-mono text-[14px] font-normal tracking-normal text-accent-ink [box-decoration-break:clone] [-webkit-box-decoration-break:clone]"
+      className="rounded-[5px] bg-accent-soft px-1.5 py-0.5 font-mono text-[14px] text-accent-ink [box-decoration-break:clone] [-webkit-box-decoration-break:clone]"
     >
       {text}
     </span>
