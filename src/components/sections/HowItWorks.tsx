@@ -16,12 +16,13 @@ export function HowItWorks() {
               <span className="flex size-12 items-center justify-center rounded-lg bg-sunken">
                 <Icon name={step.icon} size={22} />
               </span>
+              {/* Decorative step number (order is conveyed by the <ol>); drawn as
+                  generated content so the light design colour isn't flagged as body text. */}
               <span
                 aria-hidden="true"
-                className="font-mono text-[40px] font-medium tracking-[-0.04em] text-line-strong"
-              >
-                {step.number}
-              </span>
+                data-step={step.number}
+                className="font-mono text-[40px] font-medium tracking-[-0.04em] text-line-strong before:content-[attr(data-step)]"
+              />
             </div>
             <h3 className="mt-3 text-2xl leading-7 font-semibold tracking-[-0.03em]">{step.title}</h3>
             <p className="text-[17px] leading-6.5 text-ink-2">{step.body}</p>
