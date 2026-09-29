@@ -23,7 +23,7 @@ function PlanFeatures({ items }: { items: readonly string[] }) {
 function Price({ amount, period }: { amount: string; period: string }) {
   return (
     <div className="flex items-baseline gap-1">
-      <span className="text-[56px] leading-14 font-semibold tracking-[-0.05em]">{amount}</span>
+      <span className="text-[48px] leading-12 font-semibold tracking-[-0.05em] sm:text-[56px] sm:leading-14">{amount}</span>
       <span className="text-lg text-ink-3">{period}</span>
     </div>
   );
@@ -50,7 +50,7 @@ export function PricingPlans() {
               type="button"
               aria-pressed={selected}
               onClick={() => setBilling(option.value)}
-              className={`flex flex-1 items-center justify-center gap-1.5 rounded-[9px] px-4.5 text-sm font-medium sm:flex-none ${
+              className={`flex flex-1 items-center justify-center gap-1.5 rounded-[9px] px-3 text-sm sm:px-4.5 font-medium sm:flex-none ${
                 selected ? "bg-white text-ink shadow-segment" : "text-ink-2"
               }`}
             >
@@ -63,8 +63,8 @@ export function PricingPlans() {
         })}
       </div>
 
-      <div className="grid w-full max-w-140 gap-5 lg:max-w-240 lg:grid-cols-2">
-        <div className="flex flex-col gap-6 rounded-plan bg-white p-7 shadow-ring sm:p-9">
+      <div className="grid w-full max-w-140 gap-4 sm:gap-5 lg:max-w-240 lg:grid-cols-2">
+        <div className="flex flex-col gap-6 rounded-card bg-white p-7 shadow-ring sm:rounded-plan sm:p-9">
           <div className="flex flex-col gap-2.5">
             <h3 className="text-[22px] font-semibold tracking-[-0.03em]">{free.name}</h3>
             <Price amount={free.price} period={free.period} />
@@ -79,7 +79,7 @@ export function PricingPlans() {
           </a>
         </div>
 
-        <div className="relative flex flex-col gap-6 overflow-hidden rounded-plan bg-white p-7 shadow-pro sm:p-9">
+        <div className="relative flex flex-col gap-6 overflow-hidden rounded-card bg-white p-7 shadow-pro sm:rounded-plan sm:p-9">
           <Texture
             name="iris"
             sizes="300px"

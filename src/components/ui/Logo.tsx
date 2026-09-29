@@ -1,7 +1,11 @@
 import Image from "next/image";
 
-/** Logo mark + optional wordmark. Decorative image; the wordmark carries the name. */
-export function Logo({ size = 38, className = "" }: { size?: number; className?: string }) {
+/**
+ * Logo mark. Decorative image; the wordmark next to it carries the name.
+ * `size` sets the intrinsic size; pass `className` with size utilities to
+ * make the rendered size responsive.
+ */
+export function Logo({ size = 38, className }: { size?: number; className?: string }) {
   return (
     <Image
       src="/images/logo.webp"
@@ -9,8 +13,8 @@ export function Logo({ size = 38, className = "" }: { size?: number; className?:
       width={size}
       height={size}
       sizes={`${size}px`}
-      className={`object-contain ${className}`}
-      style={{ width: size, height: size }}
+      className={`shrink-0 object-contain ${className ?? ""}`}
+      style={className ? undefined : { width: size, height: size }}
     />
   );
 }

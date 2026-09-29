@@ -11,7 +11,7 @@ export function Features() {
     <section
       id="features"
       aria-label="Features"
-      className="flex flex-col gap-[clamp(80px,9.7223vw,140px)] px-gutter pt-10 pb-15"
+      className="features-y flex flex-col gap-[clamp(80px,9.7223vw,140px)] px-gutter"
     >
       {features.map((feature, index) => {
         const Visual = featureVisuals[feature.id];
@@ -19,16 +19,16 @@ export function Features() {
         return (
           <div
             key={feature.id}
-            className={`grid items-center gap-10 lg:gap-[clamp(40px,5.56vw,80px)] ${
+            className={`grid items-center gap-8 sm:gap-10 lg:gap-[clamp(40px,5.56vw,80px)] ${
               visualFirst
                 ? "lg:grid-cols-[minmax(0,640fr)_minmax(0,480fr)]"
                 : "lg:grid-cols-[minmax(0,480fr)_minmax(0,640fr)]"
             }`}
           >
             <div
-              className={`flex max-w-120 flex-col gap-5.5 ${visualFirst ? "lg:col-start-2 lg:row-start-1" : ""}`}
+              className={`flex max-w-120 flex-col gap-4.5 sm:gap-5.5 ${visualFirst ? "lg:col-start-2 lg:row-start-1" : ""}`}
             >
-              <span className="eyebrow">{feature.eyebrow}</span>
+              <span className="eyebrow max-sm:text-xs">{feature.eyebrow}</span>
               <h2 className="type-feature">
                 {feature.titleLines[0]}
                 <br />

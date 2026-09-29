@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 /**
  * Stroke icons copied from the design reference (Lucide-style, 24px grid,
  * round caps). Where an exact Lucide equivalent exists (Plus, X,
- * ChevronRight, Menu) the components import it from `lucide-react` instead.
+ * ChevronRight) the components import it from `lucide-react` instead.
  */
 const paths = {
   "arrow-right": <path d="M5 12h14M13 6l6 6-6 6" />,
@@ -63,6 +63,21 @@ const paths = {
     </>
   ),
   pause: <path d="M8 5v14M16 5v14" />,
+  menu: <path d="M4 8h16M4 16h16" />,
+  mail: <path d="M4 6h16v12H4zM4 7l8 6 8-6" />,
+  "arrow-up-right": <path d="M7 17L17 7M9 7h8v8" />,
+  card: (
+    <>
+      <rect x="3" y="6" width="18" height="12" rx="3" />
+      <path d="M3 10.5h18" />
+    </>
+  ),
+  "calendar-alt": (
+    <>
+      <rect x="4" y="5" width="16" height="15" rx="3" />
+      <path d="M4 10h16M9 3v4M15 3v4" />
+    </>
+  ),
   undo: (
     <>
       <path d="M9 7L5 11l4 4" />

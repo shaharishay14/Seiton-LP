@@ -166,10 +166,12 @@
 /* Page gutters: 120 → 64 → 32 → 20 (SPEC §9). */
 :root {
   --gutter: 20px;
+  --header-h: 64px;
 }
 @media (min-width: 640px) {
   :root {
     --gutter: 32px;
+    --header-h: 84px;
   }
 }
 @media (min-width: 1024px) {
@@ -267,36 +269,36 @@
 }
 
 /*
- * Fluid type roles. Linear between a 390px and a 1440px viewport, clamped to
- * the mobile and desktop sizes from SPEC §2 / §9.
+ * Fluid type roles. Linear between the 390 (mobile board, SPEC §11) and 1440
+ * (desktop board) viewports, clamped to those sizes outside that range.
  */
 @utility type-hero {
-  font-size: clamp(48px, 31.657px + 4.1905vw, 92px);
-  line-height: clamp(48px, 32.4px + 4vw, 90px);
+  font-size: clamp(54px, 39.886px + 3.619vw, 92px);
+  line-height: clamp(54px, 40.629px + 3.4286vw, 90px);
   font-weight: 600;
   letter-spacing: -0.055em;
 }
 @utility type-section {
-  font-size: clamp(36px, 28.571px + 1.9048vw, 56px);
-  line-height: clamp(38px, 30.571px + 1.9048vw, 58px);
+  font-size: clamp(40px, 34.057px + 1.5238vw, 56px);
+  line-height: clamp(42px, 36.057px + 1.5238vw, 58px);
   font-weight: 600;
   letter-spacing: -0.045em;
 }
 @utility type-feature {
-  font-size: clamp(36px, 30.057px + 1.5238vw, 52px);
-  line-height: clamp(38px, 32.057px + 1.5238vw, 54px);
+  font-size: clamp(38px, 32.8px + 1.3333vw, 52px);
+  line-height: clamp(40px, 34.8px + 1.3333vw, 54px);
   font-weight: 600;
   letter-spacing: -0.045em;
 }
 @utility type-closing {
   font-size: clamp(40px, 31.086px + 2.2857vw, 64px);
-  line-height: clamp(42px, 33.086px + 2.2857vw, 64px);
+  line-height: clamp(42px, 33.829px + 2.0952vw, 64px);
   font-weight: 600;
   letter-spacing: -0.05em;
 }
 @utility type-lead {
-  font-size: clamp(18px, 16.886px + 0.2857vw, 21px);
-  line-height: clamp(27px, 25.514px + 0.381vw, 31px);
+  font-size: clamp(17px, 15.514px + 0.381vw, 21px);
+  line-height: clamp(26px, 24.143px + 0.4762vw, 31px);
 }
 @utility type-body-lg {
   font-size: clamp(17px, 16.257px + 0.1905vw, 19px);
@@ -322,19 +324,58 @@
  * Hero phone stage (1440 × 547 in desktop coordinates).
  * ≥1024: scale with the viewport, never above 1.
  * 640–1023: centre phone ≈ half the width, side phones cropped.
- * <640: centre phone ≈ three quarters of the width, floating cards hidden.
  */
 .hero-stage {
   --s: tan(atan2(50cqi, 456px));
+  --stage-top: 0px;
+  --stage-left: calc(50% - 720px);
+  --stage-origin: top;
   height: calc(547px * var(--s));
 }
+/*
+ * <640 (SPEC §11): only the Home phone, at 0.766 (349px wide at 390), with a
+ * 20px gutter each side on narrower screens. The stage is shifted up so the
+ * phone starts at the top of a 494px (at 390) clip box.
+ */
 @media (max-width: 639px) {
   .hero-stage {
-    --s: tan(atan2(74cqi, 456px));
+    --s: min(0.766, tan(atan2(100cqi - 40px, 456px)));
+    --stage-top: calc(-37px * var(--s));
+    /* Home phone (x = 492 on the stage) pinned to the 20px gutter. */
+    --stage-left: calc(20px - 492px * var(--s));
+    --stage-origin: top left;
+    height: calc(494px / 0.766 * var(--s));
+    margin-top: 92px;
+    overflow: hidden;
   }
 }
 @media (min-width: 1024px) {
   .hero-stage {
     --s: min(1, tan(atan2(100cqi, 1440px)));
   }
+}
+
+/*
+ * Section spacing, linear between the mobile (390) and desktop (1440) boards.
+ * `section-y`: How it works, Pricing, FAQ (72→120 top, 24→60 bottom).
+ */
+@utility section-y {
+  padding-top: clamp(72px, 54.171px + 4.5714vw, 120px);
+  padding-bottom: clamp(24px, 10.629px + 3.4286vw, 60px);
+}
+@utility features-y {
+  padding-top: clamp(24px, 18.057px + 1.5238vw, 40px);
+  padding-bottom: clamp(24px, 10.629px + 3.4286vw, 60px);
+}
+@utility audience-y {
+  padding-top: clamp(8px, 3.543px + 1.1429vw, 20px);
+  padding-bottom: clamp(64px, 50.629px + 3.4286vw, 100px);
+}
+@utility closing-y {
+  padding-top: clamp(40px, 17.714px + 5.7143vw, 100px);
+  padding-bottom: clamp(56px, 47.086px + 2.2857vw, 80px);
+}
+@utility footer-y {
+  padding-top: clamp(32px, 29.029px + 0.7619vw, 40px);
+  padding-bottom: clamp(44px, 38.057px + 1.5238vw, 60px);
 }

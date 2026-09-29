@@ -26,12 +26,9 @@ function Floating({ children, style }: { children: ReactNode; style: CSSProperti
  */
 function Panel({ texture, children }: { texture: TextureName; children: ReactNode }) {
   return (
-    <div
-      className="pointer-events-none relative aspect-square w-full overflow-hidden rounded-panel bg-canvas shadow-ring select-none @container"
-      aria-hidden="true"
-      inert
-    >
-      <div className="scale-to-container absolute top-0 left-0 size-160 origin-top-left [--stage-w:640px]">
+    <div className="pointer-events-none relative aspect-square w-full select-none @container" aria-hidden="true" inert>
+      {/* Radius and ring live on the scaled stage so they scale with it (0.547 at 390). */}
+      <div className="scale-to-container absolute top-0 left-0 size-160 origin-top-left overflow-hidden rounded-panel bg-canvas shadow-ring [--stage-w:640px]">
         <Texture
           name={texture}
           sizes="(min-width: 640px) 640px, 100vw"
