@@ -17,15 +17,17 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+const siteUrl = siteConfig.url ? new URL(siteConfig.url) : undefined;
+
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
+  metadataBase: siteUrl,
   title: siteConfig.title,
   description: siteConfig.description,
   applicationName: siteConfig.name,
-  alternates: { canonical: "/" },
+  alternates: siteUrl ? { canonical: "/" } : undefined,
   openGraph: {
     type: "website",
-    url: "/",
+    url: siteUrl ? "/" : undefined,
     siteName: siteConfig.name,
     title: siteConfig.title,
     description: siteConfig.description,

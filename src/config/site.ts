@@ -2,8 +2,8 @@
  * Site-wide content and links. Every string on the page lives here or in the
  * phone mockup components (which render fixed, decorative app content).
  *
- * Placeholders still to be filled in: `appStoreUrl`, `url`, and every entry
- * in `legalLinks` / `contactUrl`.
+ * Placeholders still to be filled in: `appStoreUrl`, `url` (env), and every
+ * entry in `legalLinks` / `contactUrl`.
  */
 
 export type IconName =
@@ -20,8 +20,12 @@ export const siteConfig = {
   title: "Seiton — Every client. One place.",
   description:
     "Seiton keeps each client's tasks, meetings, notes and recordings in their own project. iPhone app in Hebrew and English.",
-  /** Production origin. Placeholder until the domain is decided. */
-  url: "https://seiton.app",
+  /**
+   * Production origin, e.g. "https://example.com". Placeholder: set
+   * NEXT_PUBLIC_SITE_URL once the domain is decided. While unset, canonical
+   * and og:url tags are omitted.
+   */
+  url: process.env.NEXT_PUBLIC_SITE_URL,
   /**
    * Destination for every "Get Seiton" / "Get the app" / plan CTA.
    * Placeholder: points at the pricing section until the App Store listing exists.
