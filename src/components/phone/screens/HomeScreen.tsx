@@ -23,7 +23,7 @@ export function HomeScreen() {
       <div className="flex items-end justify-between px-6 pt-14">
         <div className="flex flex-col gap-1.5">
           <span className="mono-caps text-ink-3">Wed · 23 Sep</span>
-          <span className="text-[28px] leading-8 font-semibold tracking-[-0.04em]">Good morning, Shahar</span>
+          <span className="text-[28px] leading-8 font-semibold tracking-[-0.04em]">Good morning</span>
         </div>
       </div>
 

@@ -19,7 +19,7 @@ export const siteConfig = {
   name: "Seiton",
   title: "Seiton — Every client. One place.",
   description:
-    "Seiton keeps each client's tasks, meetings, notes and recordings in their own project. iPhone app in Hebrew and English.",
+    "Seiton keeps each client's tasks, meetings, notes and recordings in their own project. An app for iPhone.",
   /**
    * Production origin, e.g. "https://example.com". Placeholder: set
    * NEXT_PUBLIC_SITE_URL once the domain is decided. While unset, canonical
@@ -52,7 +52,7 @@ export const siteConfig = {
 } as const;
 
 export const heroContent = {
-  badge: "For iPhone · Hebrew and English",
+  badge: "For iPhone",
   titleLines: ["Every client.", "One place."],
   lead: "Seiton keeps each client's tasks, meetings, notes and recordings in their own project. So nothing gets mixed up, and nothing gets lost.",
   primaryCta: "Get Seiton for iPhone",
@@ -104,7 +104,7 @@ export const features: Feature[] = [
       "Keeps going when the screen is off",
       "Saved to the client, not to a camera roll",
     ],
-    pill: "Transcripts in Hebrew and English · coming soon",
+    pill: "Transcripts · coming soon",
   },
   {
     id: "calendar",
@@ -121,9 +121,8 @@ export const features: Feature[] = [
     id: "notes",
     eyebrow: "04 · Notes and tasks",
     titleLines: ["Notes that stay", "with the client."],
-    body: "Write in Hebrew or English. Headings, lists, highlights and tags, and every task keeps its own history.",
+    body: "Write with headings, lists, highlights and tags, and every task keeps its own history.",
     bullets: [
-      "Rich text, right to left or left to right",
       "Tasks with due dates, priorities and checklists",
       "Voice memos attached to the task they belong to",
     ],
@@ -207,10 +206,6 @@ export const faq = {
   contactPrompt: "Anything else?",
   contactLabel: "Get in touch",
   items: [
-    {
-      q: "Does Seiton work in Hebrew?",
-      a: "Yes. Notes, tasks and project names work in Hebrew and English, and text follows the direction of the language you type in.",
-    },
     {
       q: "Does it sync with Apple Calendar?",
       a: "Yes. Meetings you create in Seiton are added to Apple Calendar, with a reminder before each one.",
