@@ -61,7 +61,8 @@ export function LegalToc({ items }: { items: TocItem[] }) {
                   isActive ? "bg-sunken max-lg:shadow-none" : "hover:text-accent"
                 }`}
               >
-                <span className="font-mono text-[11px] text-ink-3">{item.number}</span>
+                {/* #71717A is only AA on white; the active row's grey needs the darker ink. */}
+                <span className={`font-mono text-[11px] ${isActive ? "text-ink-2" : "text-ink-3"}`}>{item.number}</span>
                 <span>{item.title}</span>
               </a>
             </li>
