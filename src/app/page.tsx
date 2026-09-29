@@ -3,6 +3,10 @@ import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { WhoItsFor } from "@/components/sections/WhoItsFor";
 import { Features } from "@/components/sections/Features";
+import { HowItWorks } from "@/components/sections/HowItWorks";
+import { Pricing } from "@/components/sections/Pricing";
+import { Faq } from "@/components/sections/Faq";
+import { ClosingCta } from "@/components/sections/ClosingCta";
 
 export default function Home() {
   return (
@@ -13,6 +17,10 @@ export default function Home() {
           <Hero />
           <WhoItsFor />
           <Features />
+          <HowItWorks />
+          <Pricing />
+          <Faq />
+          <ClosingCta />
         </main>
       </div>
       <Footer />
