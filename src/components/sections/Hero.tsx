@@ -70,10 +70,6 @@ export function Hero() {
       <div className="absolute inset-x-0 top-0 h-[520px] max-sm:h-[380px] bg-[linear-gradient(180deg,rgba(255,255,255,0.88)_0%,rgba(255,255,255,0.7)_60%,rgba(255,255,255,0)_100%)]" />
 
       <div className="relative z-2 flex flex-col items-center gap-5.5 px-gutter pt-26 text-center sm:gap-6.5 sm:pt-37.5">
-        <span className="inline-flex min-h-7.5 items-center gap-2 rounded-sm bg-white/90 px-3 shadow-ring">
-          <span className="size-1.5 shrink-0 rounded-full bg-accent" />
-          <span className="mono-caps text-ink">{heroContent.badge}</span>
-        </span>
         <h1 id="hero-title" className="type-hero max-w-250">
           {heroContent.titleLines[0]}
           <br />

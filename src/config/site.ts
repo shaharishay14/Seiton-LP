@@ -72,7 +72,6 @@ export const siteConfig = {
 const plan = siteConfig.pricing;
 
 export const heroContent = {
-  badge: "For iPhone",
   titleLines: ["Every client.", "One place."],
   lead: "Seiton keeps each client's tasks, meetings, notes and recordings in their own project. So nothing gets mixed up, and nothing gets lost.",
   primaryCta: "Get Seiton for iPhone",
