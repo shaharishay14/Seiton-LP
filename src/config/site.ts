@@ -1,9 +1,9 @@
 /**
- * Site-wide content and links. Every string on the page lives here or in the
+ * Site-wide content and links. Every landing-page string lives here or in the
  * phone mockup components (which render fixed, decorative app content).
+ * Legal/support facts that are still unknown live in `config/legal.ts`.
  *
- * Placeholders still to be filled in: `appStoreUrl`, `url` (env), and every
- * entry in `legalLinks` / `contactUrl`.
+ * Placeholders still to be filled in: `appStoreUrl` and `url` (env).
  */
 
 export type IconName =
@@ -30,26 +30,46 @@ export const siteConfig = {
    * Destination for every "Get Seiton" / "Get the app" / plan CTA.
    * Placeholder: points at the pricing section until the App Store listing exists.
    */
-  appStoreUrl: "#pricing",
-  /** "Get in touch" link in the FAQ. Placeholder. */
-  contactUrl: "#",
+  appStoreUrl: "/#pricing",
+  /** "Get in touch" (FAQ) and footer "Contact". */
+  contactUrl: "/support#contact",
   copyrightYear: 2026,
 
+  /** Root-relative so the same header works on the landing page and inner pages. */
   nav: [
-    { label: "Features", href: "#features" },
-    { label: "How it works", href: "#how" },
-    { label: "Pricing", href: "#pricing" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Features", href: "/#features" },
+    { label: "How it works", href: "/#how" },
+    { label: "Pricing", href: "/#pricing" },
+    { label: "FAQ", href: "/#faq" },
   ],
 
-  /** Footer links. All placeholders. */
-  legalLinks: [
-    { label: "Privacy", href: "#" },
-    { label: "Terms", href: "#" },
-    { label: "Support", href: "#" },
-    { label: "Contact", href: "#" },
+  footerLinks: [
+    { label: "Privacy", href: "/privacy" },
+    { label: "Terms", href: "/terms" },
+    { label: "Support", href: "/support" },
+    { label: "Contact", href: "/support#contact" },
   ],
+
+  /**
+   * Plan facts. The single source for every price and limit on the site:
+   * landing pricing cards, the Terms "Plans and billing" table and the
+   * Support FAQ all read from here.
+   */
+  pricing: {
+    free: { price: "$0", projectLimit: 3, recordingLimitMinutes: 10 },
+    pro: {
+      /** Yearly price expressed per month. */
+      monthlyEquivalent: "$4.99",
+      yearlyPrice: "$59.99",
+      monthlyPrice: "$7.99",
+      trialDays: 7,
+      recordingLimitMinutes: 60,
+      yearlySaving: "−37%",
+    },
+  },
 } as const;
+
+const plan = siteConfig.pricing;
 
 export const heroContent = {
   badge: "For iPhone",
@@ -160,20 +180,20 @@ export const pricing = {
   eyebrow: "06 · Pricing",
   title: "Start free. Go Pro when you grow.",
   billingOptions: [
-    { value: "year", label: "Yearly", badge: "−37%" },
+    { value: "year", label: "Yearly", badge: plan.pro.yearlySaving },
     { value: "month", label: "Monthly" },
   ] satisfies { value: Billing; label: string; badge?: string }[],
   defaultBilling: "year" as Billing,
   free: {
     name: "Free",
-    price: "$0",
+    price: plan.free.price,
     period: "/month",
     note: "Core features, with limits",
     features: [
-      "Up to 3 projects",
+      `Up to ${plan.free.projectLimit} projects`,
       "Tasks, notes and meetings",
       "Apple Calendar sync",
-      "Recordings up to 10 min",
+      `Recordings up to ${plan.free.recordingLimitMinutes} min`,
     ],
     cta: "Start free",
   },
@@ -183,17 +203,17 @@ export const pricing = {
     period: "/month",
     features: [
       "Unlimited projects",
-      "Recordings up to 60 min",
+      `Recordings up to ${plan.pro.recordingLimitMinutes} min`,
       "Everything in Free",
       "Transcripts when they launch",
     ],
     byBilling: {
       year: {
-        price: "$4.99",
-        note: "$59.99 billed yearly · 7 days free",
-        cta: "Start 7-day free trial",
+        price: plan.pro.monthlyEquivalent,
+        note: `${plan.pro.yearlyPrice} billed yearly · ${plan.pro.trialDays} days free`,
+        cta: `Start ${plan.pro.trialDays}-day free trial`,
       },
-      month: { price: "$7.99", note: "Billed monthly", cta: "Go Pro" },
+      month: { price: plan.pro.monthlyPrice, note: "Billed monthly", cta: "Go Pro" },
     } satisfies Record<Billing, { price: string; note: string; cta: string }>,
   },
   footnote:

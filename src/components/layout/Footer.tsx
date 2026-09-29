@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { Logo } from "@/components/ui/Logo";
 
@@ -10,10 +11,10 @@ export function Footer() {
         <span className="ml-2.5 text-sm text-ink-3">© {siteConfig.copyrightYear}</span>
       </div>
       <nav aria-label="Legal" className="flex flex-wrap gap-x-7 gap-y-3 text-sm">
-        {siteConfig.legalLinks.map((link) => (
-          <a key={link.label} href={link.href} className="text-ink-2 hover:text-accent">
+        {siteConfig.footerLinks.map((link) => (
+          <Link key={link.label} href={link.href} className="text-ink-2 hover:text-accent">
             {link.label}
-          </a>
+          </Link>
         ))}
       </nav>
     </footer>

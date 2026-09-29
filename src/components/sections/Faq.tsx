@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { faq, siteConfig } from "@/config/site";
 import { Icon } from "@/components/ui/Icon";
 
@@ -14,9 +15,9 @@ export function Faq() {
         <h2 className="type-section">{faq.title}</h2>
         <p className="text-[17px] leading-6.5 text-ink-2">
           {faq.contactPrompt}{" "}
-          <a href={siteConfig.contactUrl} className="text-ink underline underline-offset-3 hover:text-accent">
+          <Link href={siteConfig.contactUrl} className="text-ink underline underline-offset-3 hover:text-accent">
             {faq.contactLabel}
-          </a>
+          </Link>
           .
         </p>
       </div>
