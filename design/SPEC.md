@@ -1,12 +1,12 @@
 # Seiton landing page — design spec
 
-Source: Claude canvas "v2", board **Landing page · desktop 1440** (1440 × 7700).
+Source: Claude canvas "v2". Boards covered: **Landing page · desktop 1440**, **Landing page · mobile 390**, **Privacy Policy**, **Terms of Use** and **Support** (all desktop 1440).
 Design language: **Seiton Design System v2.0 — Light. "Soft surface. Precise system."**
 Hairlines instead of shadows, mono metadata, one signal accent, silk imagery framed like a specimen.
 
 > **Source of truth for pixels:** `design/landing-desktop.html` (open it in a browser at 1440px wide).
 > This spec explains the intent, tokens, copy and behavior. When the two disagree on a number, the HTML wins.
-> Everything on the reference is desktop-only. Tablet and mobile layouts are specified in section 9.
+> The canvas has two layouts for the landing page: desktop (1440) and mobile (390). Tablet is not designed; section 9 says how to interpolate. The three inner pages are designed at desktop only; section 15 says how to make them responsive.
 
 ---
 
@@ -14,7 +14,11 @@ Hairlines instead of shadows, mono metadata, one signal accent, silk imagery fra
 
 | File | What it is |
 |---|---|
-| `landing-desktop.html` | Standalone, openable reference of the full page. Pricing toggle works. Inline styles on purpose, so values can be read straight off it. |
+| `landing-desktop.html` | Standalone reference of the full desktop landing page (1440). Pricing toggle works. Inline styles on purpose, so values can be read straight off it. |
+| `landing-mobile.html` | Standalone reference of the mobile landing page (390). Menu button and pricing toggle work. |
+| `privacy.html` | Privacy Policy, desktop 1440 |
+| `terms.html` | Terms of Use, desktop 1440 |
+| `support.html` | Support page, desktop 1440. FAQ accordion works. |
 | `assets/logo.webp` | Seiton logo mark (600×600, transparent) |
 | `assets/hero-silk-band.webp` | Wide silk band (3960×1084) used behind the hero and in the closing CTA card |
 | `assets/tex-azure.webp` | Blue silk texture 1000×1000 — Acme Corp project |
@@ -23,7 +27,7 @@ Hairlines instead of shadows, mono metadata, one signal accent, silk imagery fra
 | `assets/tex-lime.webp` | Lime silk texture — Studio rebrand project |
 | `assets/tex-iris.webp` | Holographic/iris silk texture — Dana · therapy project, Pro card |
 
-Copy `design/assets/*` to `public/images/` in the Next.js app (see the prompt for exact paths).
+Copy `design/assets/*` to `public/images/` in the Next.js app (see the prompt for exact paths). Open the reference files in a browser at their native width (1440 or 390); they link to each other.
 
 ---
 
@@ -192,6 +196,8 @@ Visual panels:
 - Section padding `100px 120px 80px`. A big rounded card with the silk band as background (white-washed), the logo mark centered, h2 **"Give every client a home."**, paragraph "Free to start. On iPhone.", primary button **"Get Seiton for iPhone"** → `#pricing`.
 
 ### 4.9 Footer
+> Footer links go to real routes: Privacy → `/privacy`, Terms → `/terms`, Support → `/support`, Contact → `/support#contact`. The FAQ line "Get in touch" → `/support#contact`.
+
 - Padding `40px 120px 60px`, `border-top: 1px solid #E6E6EA`, flex space-between.
 - Left: logo (small) + "Seiton" + "© 2026".
 - Right: Privacy · Terms · Support · Contact.
@@ -230,7 +236,7 @@ Icons are inline SVG in the reference (Lucide-style). Use `lucide-react` equival
 ## 7. Content decisions still open (use placeholders, do not invent)
 
 - **App Store URL:** not known. All "Get Seiton for iPhone" / "Get the app" buttons currently point at `#pricing`; keep that, but centralize the destination in one config constant (`siteConfig.appStoreUrl`) so it can be swapped.
-- **Privacy / Terms / Support / Contact / "Get in touch":** target URLs unknown. Use `#` placeholders behind one config object, or create stub routes if asked.
+- **Legal and support facts:** company name, address, emails, jurisdiction, hosting/email/transcription providers, retention, response time and more are unknown. In the design they appear as blue bracketed tags such as `[COMPANY NAME]`. Full list in section 14. They must live in one config file and render as visible tags until filled.
 - **Domain / OG image:** not provided.
 
 ## 8. SEO and metadata
@@ -240,9 +246,9 @@ Icons are inline SVG in the reference (Lucide-style). Use `lucide-react` equival
 - `lang="en"`. One `<h1>` (the hero). Landmarks: header, main, section with `aria-label`s as in the reference, footer.
 - Open Graph + Twitter card tags; favicon from `logo.webp`.
 
-## 9. Responsive plan (not in the canvas — derived, keep it faithful)
+## 9. Responsive plan
 
-The canvas only covers 1440px. Extend it with these rules; do not redesign.
+The canvas has **1440 (desktop)** and **390 (mobile, section 11)**. Nothing is designed in between, so interpolate with these rules; do not redesign. Below 640px, follow section 11 exactly.
 
 | Breakpoint | Behavior |
 |---|---|
@@ -261,3 +267,116 @@ Fluid type: use `clamp()` between the mobile and desktop sizes, do not jump.
 - Decorative imagery (`alt=""`), phone mockups `aria-hidden`.
 - Respect `prefers-reduced-motion`.
 - Do not rely on color alone for priority badges (they carry text: High / Medium / Low).
+
+---
+
+## 11. Mobile landing page (390)
+
+Board: **Landing page · mobile 390** (390 × 8560). Same copy, same order, same tokens as desktop. Gutters are **20px**. Everything is one column. Use this as the layout for viewports below ~640px; see section 9 for the range in between.
+
+| Section | Mobile spec |
+|---|---|
+| Header | Height 64, absolute over hero, padding `0 20px`. Left: logo 32 + "Seiton" 20/600. Right: **Get the app** (44 tall, ink, radius 11, 14px, no arrow) and a **menu button** 44×44 (radius 11, white 82% + blur, ring, two-line icon, `aria-label="Menu"`, `aria-expanded`). The desktop nav pill is not shown. |
+| Menu | Opens a card under the header: `top 64; left/right 20`, radius 14, ring + `0 20px 40px -20px rgba(11,11,15,.3)`, padding 6. Four links (Features, How it works, Pricing, FAQ), each 48 tall, padding `0 14px`, radius 9, 16/500. Closes when a link is tapped. |
+| Hero | Section height 1130, clipped. Silk band `left -560, width 1500, height 560`, same mask as desktop; white wash 380 tall. Content centered, `padding: 104px 20px 0`, gap 22: badge, **h1 54/54 −0.055em**, paragraph 17/26, buttons stacked full width (gap 10, each 52 tall; primary with arrow, secondary "See how it works"), micro copy 14px. |
+| Hero phone | One phone only: the Home screen at **scale 0.766** (456×965 source), left 20, starting at `top: 636` in the section, in a 494px-tall clip box; the phone is cut off at the bottom by a 140px gradient to white. The two side phones and floating cards are not used. |
+| Who it's for | Padding `8px 20px 64px`. Chips wrap, centered, gap 10, 44 tall, padding `0 16px`, 16/500. |
+| Features | Section padding `24px 20px`, **80px** between rows. Each row: text first, then visual, gap 32. Eyebrow 12px, **h2 38/40**, paragraph 17/26, bullets 16/23 (gap 12). Voice row keeps the "Transcripts … coming soon" pill. |
+| Feature visuals | The same 640×640 desktop panels, drawn at **scale 0.547** inside a **350×350** box. Do not redraw them; reuse the components and scale. |
+| How it works | Padding `72px 20px 24px`. h2 40/42. Cards stacked (gap 12), radius 24, padding 24, step number 32px. h3 22/26. |
+| Pricing | Padding `72px 20px 24px`. h2 40/42. Toggle is **full width** (each segment `flex: 1`). Cards stacked (gap 16), radius 24, padding 28, price 48/48. Footnote centered 14/20. |
+| FAQ | Stacks: heading block, then list. Summary 18/24 (gap 16), padding 18px 0, plus icon never shrinks. First item open. "Get in touch" → `/support#contact`. |
+| Closing CTA | Padding `40px 20px 56px`. Card 420 tall, radius 28. Logo 72, h2 40/42, paragraph 17. |
+| Footer | Stacked, padding `32px 20px 44px`, gap 20. Links wrap, each at least 44px tall (tap size). |
+
+Touch targets are at least 44px throughout. Phone-mockup internals are identical to desktop.
+
+---
+
+## 12. Privacy Policy page (`/privacy`)
+
+Board: **Privacy Policy · desktop 1440**. Reference: `privacy.html`. Terms and Support share the same shell (section 15).
+
+### 12.1 Shared inner-page shell (Privacy, Terms, Support)
+- **Header:** same as the landing page header but **not** absolute: it is in flow, 84px tall, and the hero band slides underneath it with `margin-top: -84px`. Logo → `/`. Nav links go to `/#features`, `/#how`, `/#pricing`, `/#faq`. "Get the app" → `/#pricing`.
+- **Hero band:** height **380**, clipped. Silk band at `left -1200, width 3960, height 520` with the same fade mask, white wash 420 tall. Content: `padding: 176px 120px 0`, gap 20, left aligned:
+  - Badge (same as landing, mono 11px caps, blue dot): "Legal" (Privacy, Terms) or "Support".
+  - **h1 76/76, 600, −0.055em.**
+  - Mono line 13/18 `#52525B`: `Last updated · [DATE]`.
+- **Footer:** same as landing footer, pushed to the bottom of the page (`margin-top: auto`), links to `/privacy`, `/terms`, `/support`.
+
+### 12.2 Legal layout (Privacy and Terms)
+- `main`: padding `32px 120px 120px`, grid `280px minmax(0, 1fr)`, gap 80.
+- **Left: "On this page"** nav, `position: sticky; top: 24px`. Mono 11px caps label, then one link per section: 36 tall, padding `0 10px`, radius 8, 14/500, with a mono number (`01`, `02`, …, `#71717A`) before the title. The link for the section in view gets `#F2F2F4`. Build it as a client component using `IntersectionObserver`; without JS the first item stays highlighted.
+- **Right: article**, `max-width: 760`, gap 40.
+  - **"The short version" card:** radius 20, `#FAFAFA`, ring, padding 28, gap 16. Mono caps label, then bullets using the ink check square (22×22).
+  - **Sections:** each `<section id="…">` has `border-top: 1px solid #E6E6EA; padding-top: 40px`, gap 16, `scroll-margin-top: 24px`. Title row: mono number 14px `#71717A` + **h2 30/34, 600, −0.035em**, baseline aligned.
+  - Body paragraph: **17/28, `#52525B`**. Bold runs use weight 600 and ink.
+  - Lists: 6×6 ink square bullet (radius 2), 17/28, `#52525B`, gap 8.
+  - **Definition table** ("rows"): radius 14, ring, overflow hidden. Each row is a grid `170px minmax(0,1fr)`, gap 24, padding `18px 22px`, `border-top: 1px solid #E6E6EA` except the first. Label: mono 12/20 caps ink. Value: 16/24 `#52525B`.
+- **Placeholder tag:** any unknown fact renders as a tag: Geist Mono 14px, padding `2px 6px`, radius 5, background `#EAF2FF`, text `#0050C8`, shown in square brackets, e.g. `[COMPANY NAME]`. See section 14.
+
+### 12.3 Privacy sections (in order, IDs in brackets)
+Short version (4 bullets): your content stays in your account · sign-in is by emailed code, no password · Calendar, microphone and notification access are used only for what you ask and can be turned off in iPhone Settings · we do not sell personal information.
+
+01 Who we are `[who]` · 02 What we collect `[collect]` (table: Account, Your content, Calendar, Microphone, Notifications, Purchases, Device and usage) · 03 How we use it `[use]` · 04 Recordings and transcripts `[recordings]` · 05 Who we share it with `[share]` · 06 Where it is stored `[where]` · 07 How long we keep it `[keep]` · 08 Your choices and rights `[rights]` · 09 Security `[security]` · 10 Children `[children]` · 11 Changes to this policy `[changes]` · 12 Contact `[contact]`.
+
+**The exact copy is in `privacy.html`. Copy it verbatim into a typed content file (`src/content/privacy.ts`), not JSX.** The text is a draft based on what the app does; it must be reviewed by a lawyer before launch.
+
+---
+
+## 13. Terms of Use page (`/terms`)
+
+Board: **Terms of Use · desktop 1440**. Reference: `terms.html`. Same layout as section 12.2.
+
+Short version (3 bullets): you own your content · Free has limits, Pro is billed by Apple and can be cancelled in the App Store · get consent before recording people.
+
+01 The agreement `[agreement]` · 02 Your account `[account]` · 03 Your content `[content]` · 04 Using Seiton `[use]` · 05 Plans and billing `[plans]` (table: Free, Pro, Billing, Cancel, Refunds, Prices) · 06 Free plan limits `[limits]` · 07 Changes and availability `[availability]` · 08 Our rights `[rights]` · 09 Ending these terms `[ending]` · 10 Disclaimers `[disclaimers]` · 11 Limit of liability `[liability]` · 12 Apple `[apple]` · 13 Governing law `[law]` · 14 Changes to these terms `[changes]` · 15 Contact `[contact]`.
+
+Plan facts in the Plans table must come from the same data as the landing page pricing (`siteConfig.pricing`): Free = $0, 3 projects, Apple Calendar sync, recordings up to 10 min. Pro = $59.99/year ($4.99/month equivalent) with a 7-day trial, or $7.99/month; unlimited projects; recordings up to 60 min; transcripts when they launch. Do not hard-code the numbers twice.
+
+Copy is in `terms.html`; move it to `src/content/terms.ts`. Draft only; lawyer review required.
+
+---
+
+## 14. Placeholders that must be filled before launch
+
+These are the blue tags in the design. Keep them in one file (`src/config/legal.ts`) as `string | null`. A `null` renders the blue tag; a string renders as normal text.
+
+| Key | Appears in |
+|---|---|
+| `companyName`, `companyAddress` | Privacy 01, 12 · Terms 01, 08, 11, 15 |
+| `privacyEmail` | Privacy 01, 08, 12 |
+| `supportEmail`, `responseTime` | Terms 15 · Support |
+| `lastUpdated` | Hero line on Privacy and Terms |
+| `analyticsNote` (or remove the row) | Privacy 02 "Device and usage" |
+| `transcriptionProvider`, `hostingProvider`, `emailProvider` | Privacy 04, 05 |
+| `dataRegion`, `transferSafeguards` | Privacy 06 |
+| `deletionPath`, `backupPeriod` | Privacy 07 · Terms 09 · Support FAQ "delete my account" |
+| `responsePeriod` | Privacy 08 |
+| `encryptionNote` | Privacy 09 |
+| `minimumAge` | Privacy 10 · Terms 02 |
+| `priceChangeNotice`, `regulatedDataPosition`, `liabilityCap`, `appleTermsCheck` | Terms 05, 10, 11, 12 |
+| `jurisdiction`, `courts` | Terms 13 |
+
+Add a script `npm run check:placeholders` that prints every key still `null` and exits non-zero when `NODE_ENV=production` builds are run with `--strict`. It must not block normal dev.
+
+---
+
+## 15. Support page (`/support`)
+
+Board: **Support · desktop 1440**. Reference: `support.html`. Uses the shell from 12.1 (badge "Support", h1 **"How can we help?"**, mono line "Find a quick answer below, or write to us.").
+
+1. **Contact** section, padding `32px 120px 100px`, grid `minmax(0,1fr) 440px`, gap 20.
+   - **Write to us** card (id `contact`): radius 28, ring, padding 36, gap 22. Title 30/34, intro 17/26. Fields with visible mono-caps labels: **Email** (`type=email`), **Topic** (select: Signing in, Projects and limits, Recording, Calendar, Plans and billing, Something else), **Message** (textarea, 150 tall). Inputs are 48 tall, radius 12, `inset 0 0 0 1.5px #D4D4DA`, 16px. Button "Send message" + arrow, ink, 52 tall.
+   - **Right column** (gap 20): (a) email card with the Pro-card look (ring `#0B0B0F`, big soft shadow, `tex-iris` faded at the top right): label "Email", the support email at 24/30, "Usual reply time: [RESPONSE TIME]"; (b) "Before you write" card (`#FAFAFA`, ring): Seiton version (bottom of Profile), iPhone model and iOS version, what you did / expected / happened.
+2. **Browse by topic**: padding `0 120px 100px`, eyebrow, h2 **"Start with the basics."** (56/58), then a 3-column grid (gap 20) of 6 cards: Signing in, Projects and limits, Recording, Calendar, Plans and billing, Writing in Hebrew. Card: radius 20, ring, padding 24, icon tile 48 (radius 14, `#F2F2F4`), up-right arrow top right, title 20/26, description 15/22. Cards link to `#faq`.
+3. **FAQ** (`#faq`): same layout as the landing FAQ (`360px | 1fr`, gap 80), eyebrow "Help", h2 **"Common questions."**, "Not here? Write to us" → `#contact`. Nine native `<details>` items, first open: sign-in code · Hebrew · Calendar sync · recording stopped · free limit · cancel/restore · change name or photo · Android/web · delete account (a placeholder answer).
+
+**Form behavior:** the design is static. Build it as a real form that posts to a server action / route handler (`/api/support`) which validates and, for now, only logs and returns success. Show a success state in place of the form ("Thanks. We'll reply to [email].") and inline errors under fields. Do not wire an email service; leave a clearly marked TODO with the placeholder `supportEmail`. Add a hidden honeypot field for spam.
+
+### 15.1 Responsive rules for the three inner pages
+- ≥1280: as designed.
+- 1024–1279: gutters 64; legal grid `240px | 1fr`, gap 48; Support contact grid stacks below 1100.
+- <1024: gutters 32; legal TOC moves above the article as a horizontally scrollable row of pills (or a collapsed `<details>` "On this page"), no longer sticky; Support contact and topic grids collapse to 1 and 2 columns; FAQ stacks.
+- <640: gutters 20; h1 clamp to ~44/44; legal section h2 24/28; definition-table rows become one column (label above value); topic grid 1 column; footer stacks like the mobile landing footer; header uses the mobile header (logo, Get the app, menu button).
