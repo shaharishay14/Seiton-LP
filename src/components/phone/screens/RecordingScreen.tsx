@@ -24,7 +24,7 @@ export function RecordingScreen() {
         <BackButton />
         <div className="flex h-7 items-center gap-1.5 rounded-sm bg-white/85 px-2.5 shadow-ring">
           <TextureSwatch name="azure" size={14} radius={4} />
-          <span className="mono-caps text-ink">Test (Claude)</span>
+          <span className="mono-caps text-ink">Acme Corp</span>
         </div>
         <div className="w-10" />
       </div>
