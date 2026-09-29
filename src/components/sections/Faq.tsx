@@ -7,7 +7,7 @@ export function Faq() {
     <section
       id="faq"
       aria-label="Questions"
-      className="grid gap-10 px-gutter pt-30 pb-15 lg:grid-cols-[360px_minmax(0,1fr)] lg:gap-20"
+      className="grid gap-10 px-gutter pt-20 pb-15 lg:pt-30 lg:grid-cols-[360px_minmax(0,1fr)] lg:gap-20"
     >
       <div className="flex flex-col gap-4.5">
         <span className="eyebrow">{faq.eyebrow}</span>

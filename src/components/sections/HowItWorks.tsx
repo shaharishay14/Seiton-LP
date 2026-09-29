@@ -4,7 +4,7 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 
 export function HowItWorks() {
   return (
-    <section id="how" aria-label="How it works" className="flex flex-col gap-14 px-gutter pt-30 pb-15">
+    <section id="how" aria-label="How it works" className="flex flex-col gap-14 px-gutter pt-20 pb-15 lg:pt-30">
       <SectionHeader eyebrow={howItWorks.eyebrow} title={howItWorks.title} />
       <ol className="grid gap-5 lg:grid-cols-3">
         {howItWorks.steps.map((step) => (

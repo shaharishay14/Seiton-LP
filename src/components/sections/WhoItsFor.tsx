@@ -3,7 +3,7 @@ import { Icon } from "@/components/ui/Icon";
 
 export function WhoItsFor() {
   return (
-    <section aria-label="Who it's for" className="flex flex-col items-center gap-5.5 px-gutter pt-5 pb-25 text-center">
+    <section aria-label="Who it's for" className="flex flex-col items-center gap-5.5 px-gutter pt-5 pb-16 text-center lg:pb-25">
       <h2 className="mono-caps text-ink-2">{audience.label}</h2>
       <ul className="flex flex-wrap justify-center gap-3">
         {audience.items.map((item) => (

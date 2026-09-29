@@ -4,7 +4,7 @@ import { ButtonLink } from "@/components/ui/Button";
 
 export function ClosingCta() {
   return (
-    <section aria-label="Get Seiton" className="px-gutter pt-25 pb-20">
+    <section aria-label="Get Seiton" className="px-gutter pt-16 pb-20 lg:pt-25">
       <div className="relative flex min-h-115 flex-col items-center justify-center gap-6 overflow-hidden rounded-[36px] px-6 py-16 text-center">
         <Image
           src="/images/hero-silk-band.webp"
