@@ -379,3 +379,17 @@
   padding-top: clamp(32px, 29.029px + 0.7619vw, 40px);
   padding-bottom: clamp(44px, 38.057px + 1.5238vw, 60px);
 }
+
+/* Inner pages (SPEC §12, §15.1): h1 76/76 → ~44/44, legal h2 30/34 → 24/28. */
+@utility type-page {
+  font-size: clamp(44px, 32.114px + 3.0476vw, 76px);
+  line-height: clamp(44px, 32.114px + 3.0476vw, 76px);
+  font-weight: 600;
+  letter-spacing: -0.055em;
+}
+@utility type-legal-h2 {
+  font-size: clamp(24px, 21.771px + 0.5714vw, 30px);
+  line-height: clamp(28px, 25.771px + 0.5714vw, 34px);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}

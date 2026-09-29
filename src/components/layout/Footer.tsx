@@ -2,9 +2,9 @@ import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { Logo } from "@/components/ui/Logo";
 
-export function Footer() {
+export function Footer({ className = "" }: { className?: string }) {
   return (
-    <footer className="footer-y flex flex-col items-start gap-5 border-t border-line px-gutter sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+    <footer className={`footer-y flex flex-col items-start gap-5 border-t border-line px-gutter sm:flex-row sm:items-center sm:justify-between sm:gap-6 ${className}`}>
       <div className="flex items-center gap-2.5">
         <Logo size={28} />
         <span className="text-[17px] font-semibold tracking-[-0.035em]">{siteConfig.name}</span>
