@@ -1,12 +1,15 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { Hero } from "@/components/sections/Hero";
 
 export default function Home() {
   return (
     <>
-      <div className="relative overflow-x-clip">
+      <div className="relative">
         <Header />
-        <main id="top" className="min-h-[1180px]" />
+        <main>
+          <Hero />
+        </main>
       </div>
       <Footer />
     </>

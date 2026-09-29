@@ -317,3 +317,24 @@
 @utility scale-to-container {
   transform: scale(tan(atan2(100cqi, var(--stage-w))));
 }
+
+/*
+ * Hero phone stage (1440 × 547 in desktop coordinates).
+ * ≥1024: scale with the viewport, never above 1.
+ * 640–1023: centre phone ≈ half the width, side phones cropped.
+ * <640: centre phone ≈ three quarters of the width, floating cards hidden.
+ */
+.hero-stage {
+  --s: tan(atan2(50cqi, 456px));
+  height: calc(547px * var(--s));
+}
+@media (max-width: 639px) {
+  .hero-stage {
+    --s: tan(atan2(74cqi, 456px));
+  }
+}
+@media (min-width: 1024px) {
+  .hero-stage {
+    --s: min(1, tan(atan2(100cqi, 1440px)));
+  }
+}
