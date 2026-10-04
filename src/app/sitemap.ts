@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
 
-const routes = ["/", "/privacy", "/terms", "/support"];
+/** One-page release: only the landing page is listed. */
+const routes = ["/"];
 
 /** Needs absolute URLs, so it stays empty until NEXT_PUBLIC_SITE_URL is set. */
 export default function sitemap(): MetadataRoute.Sitemap {

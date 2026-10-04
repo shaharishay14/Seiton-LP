@@ -18,18 +18,10 @@ const COUNTER_ICONS: IconKey[] = ["check-square", "file", "mic"];
  * Project folder card: neutral folder with a white front. The project texture
  * blends into the front at 42% and fades out toward the counts.
  */
-export function ProjectFolder({
-  folder,
-  animated = false,
-}: {
-  folder: FolderData;
-  animated?: boolean;
-}) {
+export function ProjectFolder({ folder }: { folder: FolderData }) {
   return (
     <span
-      className={`relative block h-44 w-[158px] shrink-0 drop-shadow-[0_14px_16px_rgba(11,11,15,0.12)] ${
-        animated ? "animate-rise" : ""
-      }`}
+      className="relative block h-44 w-[158px] shrink-0 drop-shadow-[0_14px_16px_rgba(11,11,15,0.12)]"
     >
       {/* Folder tab and back */}
       <span className="absolute top-0 left-0 block h-7 w-17.5 rounded-[10px_12px_0_0] bg-folder" />
@@ -57,7 +49,7 @@ export function ProjectFolder({
             <span className="text-[15px] font-semibold tracking-[-0.02em] text-ink">{folder.name}</span>
             <span className="flex items-center gap-1.5">
               {folder.live && (
-                <span className={`size-1.5 shrink-0 rounded-full bg-accent ${animated ? "animate-blink" : ""}`} />
+                <span className="size-1.5 shrink-0 rounded-full bg-accent" />
               )}
               <span
                 className={`font-mono text-[10px] leading-[13px] font-medium tracking-[0.05em] whitespace-nowrap uppercase ${
@@ -101,6 +93,4 @@ export const FOLDERS: FolderData[] = [
   { name: "Acme Corp", count: 12, texture: "azure", status: "Sync today · 16:00", live: true, counts: [4, 5, 3] },
   { name: "Northwind", count: 8, texture: "lilac", status: "Kickoff tomorrow", counts: [2, 4, 1] },
   { name: "Globex", count: 21, texture: "coral", status: "Launch in 3 days", counts: [9, 8, 4] },
-  { name: "Studio rebrand", count: 6, texture: "lime", status: "3 tasks", counts: [3, 2, 1] },
-  { name: "Dana · therapy", count: 14, texture: "iris", status: "Session Thu · 10:00", counts: [1, 11, 2] },
 ];

@@ -3,7 +3,8 @@
  * phone mockup components (which render fixed, decorative app content).
  * Legal/support facts that are still unknown live in `config/legal.ts`.
  *
- * Placeholders still to be filled in: `appStoreUrl` and `url` (env).
+ * One-page "coming soon" release: no store link, no prices and no links to
+ * the legal or support pages. Placeholder still to be filled in: `url` (env).
  */
 
 export type IconName =
@@ -17,43 +18,30 @@ export type IconName =
 
 export const siteConfig = {
   name: "Seiton",
-  title: "Seiton — Every client. One place.",
+  title: "Seiton · Your AI assistant for every project.",
   description:
-    "Seiton keeps each client's tasks, meetings, notes and recordings in their own project. An app for iPhone.",
+    "Tell Seiton what you need, in your own words. It adds tasks, moves deadlines and turns meetings into action items, across all your projects. Coming soon to iPhone.",
   /**
    * Production origin, e.g. "https://example.com". Placeholder: set
    * NEXT_PUBLIC_SITE_URL once the domain is decided. While unset, canonical
    * and og:url tags are omitted.
    */
   url: process.env.NEXT_PUBLIC_SITE_URL,
-  /**
-   * Destination for every "Get Seiton" / "Get the app" / plan CTA.
-   * Placeholder: points at the pricing section until the App Store listing exists.
-   */
-  appStoreUrl: "/#pricing",
-  /** "Get in touch" (FAQ) and footer "Contact". */
-  contactUrl: "/support#contact",
+  /** Label of the disabled button that stands in for every app CTA until launch. */
+  comingSoonLabel: "Coming soon",
+  copyrightHolder: "Shahar Ishay",
   copyrightYear: 2026,
 
   /** Root-relative so the same header works on the landing page and inner pages. */
   nav: [
     { label: "Features", href: "/#features" },
     { label: "How it works", href: "/#how" },
-    { label: "Pricing", href: "/#pricing" },
     { label: "FAQ", href: "/#faq" },
   ],
 
-  footerLinks: [
-    { label: "Privacy", href: "/privacy" },
-    { label: "Terms", href: "/terms" },
-    { label: "Support", href: "/support" },
-    { label: "Contact", href: "/support#contact" },
-  ],
-
   /**
-   * Plan facts. The single source for every price and limit on the site:
-   * landing pricing cards, the Terms "Plans and billing" table and the
-   * Support FAQ all read from here.
+   * Plan facts for the Terms "Plans and billing" table and the Support FAQ.
+   * Not shown on the landing page: prices are not final.
    */
   pricing: {
     free: { price: "$0", projectLimit: 3, recordingLimitMinutes: 10 },
@@ -69,28 +57,27 @@ export const siteConfig = {
   },
 } as const;
 
-const plan = siteConfig.pricing;
-
 export const heroContent = {
-  titleLines: ["Every client.", "One place."],
-  lead: "Seiton keeps each client's tasks, meetings, notes and recordings in their own project. So nothing gets mixed up, and nothing gets lost.",
-  primaryCta: "Get Seiton for iPhone",
+  badge: "For iPhone",
+  /** Desktop and mobile headlines differ in the design. */
+  titleLines: ["Your AI assistant", "for every project."],
+  titleLinesMobile: ["Your AI", "assistant."],
+  lead: "Tell Seiton what you need, in your own words. It adds tasks, moves deadlines and turns meetings into action items, across all your projects.",
   secondaryCta: { label: "See how it works", href: "#how" },
-  microcopy: "Free to start. No credit card.",
 } as const;
 
 export const audience = {
-  label: "Made for people who work with clients",
+  label: "Made for people who run more than one thing",
   items: [
     { label: "Freelancers", icon: "folder" },
     { label: "Consultants", icon: "check-square" },
-    { label: "Therapists", icon: "file" },
-    { label: "Coaches", icon: "user" },
+    { label: "Founders", icon: "file" },
+    { label: "Makers", icon: "user" },
     { label: "Agencies", icon: "bell" },
   ] satisfies { label: string; icon: IconName }[],
 } as const;
 
-export type FeatureId = "projects" | "voice" | "calendar" | "notes";
+export type FeatureId = "assistant" | "meetings" | "accounts" | "notes";
 
 export type Feature = {
   id: FeatureId;
@@ -103,47 +90,47 @@ export type Feature = {
 
 export const features: Feature[] = [
   {
-    id: "projects",
-    eyebrow: "01 · Projects",
-    titleLines: ["A folder for", "every client."],
-    body: "Open a project and everything about that client is there: what is due, what was said, what comes next.",
+    id: "assistant",
+    eyebrow: "01 · Assistant",
+    titleLines: ["Just tell it", "what you need."],
+    body: "Type or speak, in plain words. Seiton works out the project, the date and the details, then does it. It asks before it changes anything important.",
     bullets: [
-      "Tasks, meetings, notes and recordings in one place",
-      "Pin your active clients to Home",
-      "A glance shows what is due and what is next",
+      "Add a task or reminder in one sentence",
+      "Move a whole day of tasks with one message",
+      "Asks for your approval first",
     ],
   },
   {
-    id: "voice",
-    eyebrow: "02 · Voice",
-    titleLines: ["Record the", "meeting."],
-    body: "One tap to start. It keeps recording with your phone locked, and the audio is saved straight to the right project.",
+    id: "meetings",
+    eyebrow: "02 · Meetings",
+    titleLines: ["Record it.", "Get the tasks."],
+    body: "One tap to start. Seiton transcribes the recording, finds the action items and offers them as tasks. You choose what to keep.",
     bullets: [
       "Start from the meeting or from Home",
       "Keeps going when the screen is off",
-      "Saved to the client, not to a camera roll",
+      "Action items become tasks you approve",
     ],
     pill: "Transcripts · coming soon",
   },
   {
-    id: "calendar",
-    eyebrow: "03 · Calendar",
-    titleLines: ["Synced with", "Apple Calendar."],
-    body: "Meetings you add in Seiton show up in Apple Calendar, with a reminder before each one. No double entry.",
+    id: "accounts",
+    eyebrow: "03 · Accounts",
+    titleLines: ["Your inbox and", "calendar, linked."],
+    body: "Link Apple Calendar, Google Calendar and Gmail. Pick a different inbox and calendar for each project, so work never mixes.",
     bullets: [
-      "Meetings land in the calendar you already use",
-      "A reminder 15 minutes before",
-      "Works with the Calendar app you already have",
+      "Apple Calendar and Google Calendar",
+      "A different inbox and calendar per project",
+      "Gmail drafts, sent only when you approve · coming soon",
     ],
   },
   {
     id: "notes",
     eyebrow: "04 · Notes and tasks",
-    titleLines: ["Notes that stay", "with the client."],
-    body: "Write with headings, lists, highlights and tags, and every task keeps its own history.",
+    titleLines: ["Notes that turn", "into tasks."],
+    body: "Ask Seiton to turn any note into tasks, or to find what you decided last week.",
     bullets: [
       "Tasks with due dates, priorities and checklists",
-      "Voice memos attached to the task they belong to",
+      "Ask for tasks from any note or recording",
     ],
   },
 ];
@@ -156,74 +143,26 @@ export const howItWorks = {
       number: "01",
       icon: "folder",
       title: "Create a project",
-      body: "One per client, patient or job. Pick a texture so you can spot it.",
+      body: "One per client or job. Pick a texture so you can spot it.",
     },
     {
       number: "02",
       icon: "plus",
-      title: "Add what matters",
-      body: "Tasks with due dates, meetings, notes. Everything lands in that project.",
+      title: "Tell the assistant",
+      body: "Say what you need in your own words. It lands in the right project.",
     },
     {
       number: "03",
       icon: "mic",
-      title: "Record and stay synced",
-      body: "Record the meeting. It goes to the project, and to your calendar.",
+      title: "Review and approve",
+      body: "Check what it did. It asks before it changes or sends anything important.",
     },
   ] satisfies { number: string; icon: IconName; title: string; body: string }[],
 } as const;
 
-export type Billing = "year" | "month";
-
-export const pricing = {
-  eyebrow: "06 · Pricing",
-  title: "Start free. Go Pro when you grow.",
-  billingOptions: [
-    { value: "year", label: "Yearly", badge: plan.pro.yearlySaving },
-    { value: "month", label: "Monthly" },
-  ] satisfies { value: Billing; label: string; badge?: string }[],
-  defaultBilling: "year" as Billing,
-  free: {
-    name: "Free",
-    price: plan.free.price,
-    period: "/month",
-    note: "Core features, with limits",
-    features: [
-      `Up to ${plan.free.projectLimit} projects`,
-      "Tasks, notes and meetings",
-      "Apple Calendar sync",
-      `Recordings up to ${plan.free.recordingLimitMinutes} min`,
-    ],
-    cta: "Start free",
-  },
-  pro: {
-    name: "Pro",
-    badge: "Recommended",
-    period: "/month",
-    features: [
-      "Unlimited projects",
-      `Recordings up to ${plan.pro.recordingLimitMinutes} min`,
-      "Everything in Free",
-      "Transcripts when they launch",
-    ],
-    byBilling: {
-      year: {
-        price: plan.pro.monthlyEquivalent,
-        note: `${plan.pro.yearlyPrice} billed yearly · ${plan.pro.trialDays} days free`,
-        cta: `Start ${plan.pro.trialDays}-day free trial`,
-      },
-      month: { price: plan.pro.monthlyPrice, note: "Billed monthly", cta: "Go Pro" },
-    } satisfies Record<Billing, { price: string; note: string; cta: string }>,
-  },
-  footnote:
-    "Prices in USD. Subscriptions are billed through the App Store and can be cancelled anytime.",
-} as const;
-
 export const faq = {
-  eyebrow: "07 · FAQ",
+  eyebrow: "06 · FAQ",
   title: "Questions.",
-  contactPrompt: "Anything else?",
-  contactLabel: "Get in touch",
   items: [
     {
       q: "Does it sync with Apple Calendar?",
@@ -234,22 +173,13 @@ export const faq = {
       a: "Not yet. Seiton is iPhone only for now.",
     },
     {
-      q: "Can I cancel Pro?",
-      a: "Anytime, from your App Store subscriptions. You keep Pro until the end of the period you paid for.",
-    },
-    {
-      q: "What happens when I hit the free limit?",
-      a: "Nothing is deleted. Archive a project to make room, or upgrade to Pro for unlimited projects.",
-    },
-    {
-      q: "Who is it for?",
-      a: "Anyone who juggles several clients: freelancers, consultants, therapists, coaches and small agencies.",
+      q: "What can the assistant do?",
+      a: "Add and move tasks, answer questions about your day, pull action items from meetings, and draft email replies once Gmail is connected. It asks before it changes or sends anything important.",
     },
   ],
 } as const;
 
 export const closingCta = {
-  title: "Give every client a home.",
-  body: "Free to start. On iPhone.",
-  cta: "Get Seiton for iPhone",
+  title: "Let Seiton run your day.",
+  body: "Coming soon to iPhone.",
 } as const;

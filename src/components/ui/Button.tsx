@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { siteConfig } from "@/config/site";
 import { Icon } from "./Icon";
 
 type ButtonLinkProps = {
@@ -23,7 +24,7 @@ const variants = {
   secondary: "bg-surface text-ink shadow-ring-strong",
 } as const;
 
-/** Link styled as a button (every CTA on the page is an in-page or external link). */
+/** Link styled as a button (in-page links such as "See how it works"). */
 export function ButtonLink({
   href,
   children,
@@ -37,5 +38,27 @@ export function ButtonLink({
       <span>{children}</span>
       {arrow && <Icon name="arrow-right" size={size === "lg" ? 18 : 16} />}
     </a>
+  );
+}
+
+/**
+ * Disabled stand-in for every app CTA until the App Store listing exists.
+ * A real <button disabled>: announced as unavailable, not focusable, no link.
+ */
+export function ComingSoonButton({
+  size = "lg",
+  className = "",
+}: {
+  size?: "lg" | "nav";
+  className?: string;
+}) {
+  return (
+    <button
+      type="button"
+      disabled
+      className={`${base} ${sizes[size]} ${variants.primary} cursor-not-allowed opacity-70 ${className}`}
+    >
+      {siteConfig.comingSoonLabel}
+    </button>
   );
 }

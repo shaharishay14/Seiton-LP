@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { closingCta, siteConfig } from "@/config/site";
-import { ButtonLink } from "@/components/ui/Button";
+import { closingCta } from "@/config/site";
+import { ComingSoonButton } from "@/components/ui/Button";
 
 export function ClosingCta() {
   return (
@@ -26,9 +26,7 @@ export function ClosingCta() {
         <h2 className="type-closing relative">{closingCta.title}</h2>
         <p className="relative text-[17px] text-ink-2 sm:text-[19px]">{closingCta.body}</p>
         <div className="relative">
-          <ButtonLink href={siteConfig.appStoreUrl} arrow>
-            {closingCta.cta}
-          </ButtonLink>
+          <ComingSoonButton />
         </div>
       </div>
     </section>

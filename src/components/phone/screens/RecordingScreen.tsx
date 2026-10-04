@@ -10,7 +10,7 @@ const LEVELS = [
   10, 12, 22, 33, 39, 33, 16, 26, 46, 55, 50, 32,
 ];
 
-/** Live recording screen: "Maestro weekly", 04:12. */
+/** Live recording screen: "Weekly sync", 04:12. */
 export function RecordingScreen() {
   return (
     <AppScreen background="white">
@@ -29,8 +29,8 @@ export function RecordingScreen() {
         <div className="w-10" />
       </div>
       <div className="relative mx-6 mt-6.5 flex flex-col items-center gap-1.5 text-center">
-        <span className="text-2xl leading-7 font-semibold tracking-[-0.035em]">Maestro weekly</span>
-        <span className="mono-caps text-ink-2">Today&apos;s 16:55 meeting</span>
+        <span className="text-2xl leading-7 font-semibold tracking-[-0.035em]">Weekly sync</span>
+        <span className="mono-caps text-ink-2">Today&apos;s 16:00 meeting</span>
       </div>
 
       <div className="absolute inset-x-0 top-[250px] flex flex-col items-center gap-3.5">
@@ -49,16 +49,6 @@ export function RecordingScreen() {
         animated
         className="absolute inset-x-7 top-[420px] h-16 justify-between"
       />
-
-      <div className="absolute inset-x-6 top-[528px] flex flex-col gap-2 rounded-md bg-white/90 px-3.5 py-3 shadow-ring backdrop-blur-[12px]">
-        <div className="flex justify-between">
-          <span className="mono-caps text-ink-2">Free plan</span>
-          <span className="mono-caps text-ink">4:12 of 10:00</span>
-        </div>
-        <div className="h-[3px] rounded-[2px] bg-line">
-          <div className="h-full w-[42%] rounded-[2px] bg-ink" />
-        </div>
-      </div>
 
       <div className="absolute inset-x-6 bottom-19 flex items-center justify-between">
         <span className="flex size-14 items-center justify-center rounded-xl bg-white shadow-ring-strong">

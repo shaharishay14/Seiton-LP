@@ -1,9 +1,18 @@
 # Seiton — website
 
-Marketing site for **Seiton**, the iPhone app that keeps each client's tasks,
-meetings, notes and recordings in their own project. Next.js (App Router) +
-TypeScript + Tailwind CSS v4. The design source of truth is in [`design/`](design/)
-(`SPEC.md` and the 1440px reference `landing-desktop.html`).
+Marketing site for **Seiton**, an AI assistant for iPhone that keeps all your
+projects moving. Next.js (App Router) + TypeScript + Tailwind CSS v4. The current
+landing design is [`design/Landing.dc.html`](design/Landing.dc.html) (1440px) and
+[`design/LandingMobile.dc.html`](design/LandingMobile.dc.html) (390px); `SPEC.md`
+and the older references document the rest of the system.
+
+**One-page "coming soon" release.** The landing page has no prices, no plan
+wording, no App Store link and no Privacy, Terms or Support pages: every app
+CTA is a disabled "Coming soon" button. Those pages and `POST /api/support` are
+parked in `src/app/_unpublished/` — a private folder, so Next.js does not route
+it and the URLs return 404. To publish them again, move the folders back up to
+`src/app/` (and `api/support` to `src/app/api/support`) and add them to the
+sitemap and footer.
 
 ## Run it
 
@@ -21,20 +30,21 @@ npm run typecheck
 # with the dev server running on :3000
 npx playwright install chromium       # once
 npm run screenshots                   # full-page shots of the reference + site → .screenshots/
-npm run check:interactions            # tab order/focus rings, billing toggle, FAQ, mobile menu, reduced motion
+npm run check:interactions            # tab order/focus rings, FAQ, mobile menu, unpublished routes 404, reduced motion
+npm run check:landing                 # no prices/plan wording, no legal/App Store links, CTAs disabled
 npm run check:dev-indicator           # confirms the Next.js dev badge is hidden
 npm run check:placeholders            # lists legal facts still null (add `-- --strict` to fail on any)
 ```
 
-Routes: `/` (landing), `/privacy`, `/terms`, `/support`, and `POST /api/support`.
+Routes: `/` (landing) only. `/privacy`, `/terms`, `/support` and `POST /api/support` are unpublished (see above).
 
 ## Where things live
 
 | What | Where |
 |---|---|
 | Design tokens (colours, radii, shadows, fonts, keyframes, gutters, fluid type roles) | `src/app/globals.css` (`@theme` block + `@utility` roles) |
-| Landing copy, nav, footer links, FAQ | `src/config/site.ts` |
-| **Plan prices and limits** (single source for landing, Terms and Support) | `siteConfig.pricing` in `src/config/site.ts` |
+| Landing copy, nav, FAQ | `src/config/site.ts` |
+| **Plan prices and limits** (Terms and Support only; not shown on the landing page) | `siteConfig.pricing` in `src/config/site.ts` |
 | Unknown legal/support facts (company, emails, jurisdiction…) | `src/config/legal.ts` — `null` renders a blue `[TAG]` |
 | Privacy / Terms text (typed blocks) | `src/content/privacy.ts`, `src/content/terms.ts` |
 | Support copy and FAQ | `src/content/support.ts`, `src/content/support-faq.ts` |
@@ -44,17 +54,16 @@ Routes: `/` (landing), `/privacy`, `/terms`, `/support`, and `POST /api/support`
 | Phone frame, app screens, floating cards | `src/components/phone/` |
 | Reference-derived stroke icons | `src/components/ui/Icon.tsx` (Lucide is used for Plus/X/Chevron/Menu) |
 
-Client components: `PricingPlans` (billing toggle), `MobileMenu`, `LegalToc` (section highlight) and
+Client components: `MobileMenu`, `LegalToc` (section highlight) and
 `SupportForm`. Everything else is server-rendered and static.
 
 ## Placeholders to fill in
 
-All in `src/config/site.ts`:
-
-- **`appStoreUrl`** — every "Get Seiton for iPhone", "Get the app" and plan CTA uses it. Currently `#pricing`.
+- **App Store launch** — the header, hero and closing CTAs are `ComingSoonButton`
+  (`src/components/ui/Button.tsx`). Swap them for links once the listing exists.
 - **Every key in `src/config/legal.ts`** (23, all `null`). `npm run check:placeholders` lists them.
 - **Support email delivery** — `POST /api/support` validates and logs only. See the `TODO(support-email)`
-  in `src/app/api/support/route.ts`; wire it to `legal.supportEmail` and a mail provider.
+  in `src/app/_unpublished/api/support/route.ts`; wire it to `legal.supportEmail` and a mail provider.
 - **Site URL** — set `NEXT_PUBLIC_SITE_URL` (e.g. `https://seiton.app`). Until it is set, canonical and
   `og:url` are omitted and `sitemap.xml` is empty.
 

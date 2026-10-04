@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
-import { Icon } from "@/components/ui/Icon";
+import { ComingSoonButton } from "@/components/ui/Button";
 import { Logo } from "@/components/ui/Logo";
 import { MobileMenu } from "./MobileMenu";
 
@@ -34,13 +34,7 @@ export function Header({ variant = "overlay" }: { variant?: "overlay" | "inflow"
         ))}
       </nav>
       <div className="flex items-center gap-2">
-        <a
-          href={siteConfig.appStoreUrl}
-          className="inline-flex h-11 shrink-0 items-center gap-2 rounded-[11px] bg-ink px-4 text-sm font-medium whitespace-nowrap text-white sm:px-4.5"
-        >
-          Get the app
-          <Icon name="arrow-right" size={16} className="max-sm:hidden" />
-        </a>
+        <ComingSoonButton size="nav" className="px-4 sm:px-4.5" />
         <MobileMenu />
       </div>
     </header>

@@ -1,7 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import type { FeatureId } from "@/config/site";
 import { PhoneFrame, phoneTilt } from "@/components/phone/PhoneFrame";
-import { NewProjectTile, ProjectFolder, FOLDERS } from "@/components/phone/ProjectFolder";
 import { Texture, maskStyle, masks, type TextureName } from "@/components/phone/Texture";
 import { RecordingScreen } from "@/components/phone/screens/RecordingScreen";
 import { CalendarScreen } from "@/components/phone/screens/CalendarScreen";
@@ -10,6 +9,7 @@ import { RecordingChip } from "@/components/phone/cards/RecordingChip";
 import { SyncedCard } from "@/components/phone/cards/SyncedCard";
 import { NoteCard } from "@/components/phone/cards/NoteCard";
 import { TaskCard } from "@/components/phone/cards/TaskCard";
+import { AssistantChat, AssistantInput } from "@/components/phone/cards/AssistantChat";
 
 /** A card floating above the phone, positioned in 640 × 640 panel coordinates. */
 function Floating({ children, style }: { children: ReactNode; style: CSSProperties }) {
@@ -41,14 +41,14 @@ function Panel({ texture, children }: { texture: TextureName; children: ReactNod
   );
 }
 
-function ProjectsVisual() {
+function AssistantVisual() {
   return (
     <Panel texture="azure">
-      <div className="absolute top-27.5 left-1/2 -ml-62.5 grid scale-102 grid-cols-[repeat(3,158px)] gap-x-3.5 gap-y-4.5">
-        {FOLDERS.map((f) => (
-          <ProjectFolder key={f.name} folder={f} animated />
-        ))}
-        <NewProjectTile />
+      <div className="absolute top-17.5 left-1/2 -ml-[230px]">
+        <AssistantChat />
+      </div>
+      <div className="absolute inset-x-[90px] bottom-10">
+        <AssistantInput />
       </div>
     </Panel>
   );
@@ -97,8 +97,8 @@ function NotesVisual() {
 }
 
 export const featureVisuals: Record<FeatureId, () => ReactNode> = {
-  projects: ProjectsVisual,
-  voice: VoiceVisual,
-  calendar: CalendarVisual,
+  assistant: AssistantVisual,
+  meetings: VoiceVisual,
+  accounts: CalendarVisual,
   notes: NotesVisual,
 };

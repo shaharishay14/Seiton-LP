@@ -8,7 +8,7 @@ import path from "node:path";
 
 const [baseUrl = "http://localhost:3000", outDir = ".screenshots", ...w] = process.argv.slice(2);
 const widths = w.length ? w.map(Number) : [1440, 1024, 768, 390];
-const routes = { home: "/", privacy: "/privacy", terms: "/terms", support: "/support" };
+const routes = { home: "/" };
 const references = [
   ["landing-desktop", 1440],
   ["landing-mobile", 390],

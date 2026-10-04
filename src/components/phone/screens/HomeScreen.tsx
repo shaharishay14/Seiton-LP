@@ -23,7 +23,7 @@ export function HomeScreen() {
       <div className="flex items-end justify-between px-6 pt-14">
         <div className="flex flex-col gap-1.5">
           <span className="mono-caps text-ink-3">Wed · 23 Sep</span>
-          <span className="text-[28px] leading-8 font-semibold tracking-[-0.04em]">Good morning</span>
+          <span className="text-[28px] leading-8 font-semibold tracking-[-0.04em]">Good morning, Alex</span>
         </div>
       </div>
 
@@ -37,7 +37,7 @@ export function HomeScreen() {
         <span className="text-[13px] font-medium text-ink-2">See all</span>
       </div>
       <div className="flex items-end gap-3.5 overflow-hidden px-6 pt-3.5 pb-5">
-        {FOLDERS.slice(0, 3).map((f) => (
+        {FOLDERS.map((f) => (
           <ProjectFolder key={f.name} folder={f} />
         ))}
         <NewProjectTile />

@@ -6,8 +6,8 @@ export type FaqItem = { q: string; a: ReactNode };
 type FaqSectionProps = {
   eyebrow: string;
   title: string;
-  /** Line under the heading, e.g. "Anything else? Get in touch." */
-  intro: ReactNode;
+  /** Optional line under the heading, e.g. "Anything else? Get in touch." */
+  intro?: ReactNode;
   items: readonly FaqItem[];
   /** `name` shared by the <details> so only one item is open at a time. */
   group: string;
@@ -28,7 +28,7 @@ export function FaqSection({ eyebrow, title, intro, items, group, className = ""
       <div className="flex flex-col gap-4.5">
         <span className="eyebrow">{eyebrow}</span>
         <h2 className="type-section">{title}</h2>
-        <p className="text-[17px] leading-6.5 text-ink-2">{intro}</p>
+        {intro && <p className="text-[17px] leading-6.5 text-ink-2">{intro}</p>}
       </div>
       <div className="flex flex-col">
         {items.map((item, i) => (
