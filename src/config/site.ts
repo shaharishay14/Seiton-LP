@@ -165,6 +165,10 @@ export const faq = {
   title: "Questions.",
   items: [
     {
+      q: "Can I undo what the assistant does?",
+      a: "Yes. Every task the assistant adds shows a card with an Undo button.",
+    },
+    {
       q: "Does it sync with Apple Calendar?",
       a: "Yes. Meetings you create in Seiton are added to Apple Calendar, with a reminder before each one.",
     },

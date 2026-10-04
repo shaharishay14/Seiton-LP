@@ -40,7 +40,7 @@ const check = (ok, label) => {
 
   // FAQ
   const details = page.locator("#faq details");
-  check((await details.count()) === 3, "3 FAQ items");
+  check((await details.count()) === 4, "4 FAQ items");
   check(await details.nth(0).evaluate((d) => d.open), "first FAQ item open by default");
   await details.nth(2).locator("summary").click();
   check(await details.nth(2).evaluate((d) => d.open), "clicking a question opens it");
